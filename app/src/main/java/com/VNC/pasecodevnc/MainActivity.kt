@@ -2,14 +2,22 @@
 
 package com.VNC.pasecodevnc
 
+import android.Manifest
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.hardware.display.VirtualDisplay
+import android.media.MediaRecorder
+import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.SparseIntArray
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
@@ -25,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.VNC.pasecodevnc.mediaProject.GetPermissions
 import com.VNC.pasecodevnc.ui.theme.PaseCodeVNCTheme
@@ -33,32 +42,45 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PaseCodeVNCTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    MainScreen()
-                }
+
+            Button(onClick = {
+                //todo
             }
+            ) {
+                Text(text = "CLIC")
+            }
+
         }
     }
 }
 
 
+
+
+/*
+            PaseCodeVNCTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    //MainScreen()
+                }
+            }
+ */
+@RequiresApi(34)
 @Composable
 fun MainScreen() {
     val context = LocalContext.current
     var state by remember { mutableStateOf(false) }
 
-        
-    Box (contentAlignment = Alignment.Center) {
+
+    Box(contentAlignment = Alignment.Center) {
         Button(onClick = { state = true }) {
             Text(text = "Mostrar Menú")
         }
     }
 
-    if (state){
+    if (state) {
         //OpenFileManager(context)
         GetPermissions()
     }
